@@ -1,4 +1,4 @@
-import { ModeToggle } from "./components/ui/mode-toggle"
+import { ModeToggle } from "./components/ui/mode-toggle";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <ModeToggle />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
