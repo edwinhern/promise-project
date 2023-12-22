@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@/providers/theme-provider";
-import { ChildProp } from "@/types/common";
 
-export const Providers: React.FC<ChildProp> = ({ children }) => {
+export const Providers: React.FC<ChildProps> = ({ children }) => {
   return (
     <>
       <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">

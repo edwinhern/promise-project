@@ -1,14 +1,16 @@
-import { ModeToggle } from "./components/ui/mode-toggle";
+import "./styles/global.css";
 
-function App() {
-  return (
-    <>
-      <div className="flex h-screen flex-row items-center justify-center gap-4">
-        <h2 className="text-red-500">hello world!</h2>
-        <ModeToggle />
-      </div>
-    </>
-  );
-}
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 
-export default App;
+import { Providers } from "@/providers";
+import { AppRoutes } from "@/routes";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Providers>
+      <RouterProvider router={AppRoutes} />
+    </Providers>
+  </React.StrictMode>,
+);
