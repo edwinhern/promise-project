@@ -4,8 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
-import { Providers } from "@/providers";
-import { AppRoutes } from "@/routes";
+import { Providers } from "@/web/providers";
+import { AppRoutes } from "@/web/routes";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,9 +1,9 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 
-import { Base } from "@/layouts/Base";
-import { HomePage } from "@/pages/Home";
-import { NotFoundPage } from "@/pages/NotFound";
+import { Base } from "@/web/layouts/Base";
+import { HomePage } from "@/web/pages/Home";
+import { NotFoundPage } from "@/web/pages/NotFound";
 
 export const AppRoutes = createBrowserRouter(
   createRoutesFromElements(
