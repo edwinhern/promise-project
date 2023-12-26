@@ -1,7 +1,7 @@
-import { Button } from "@/web/components/ui/button";
-import { ModeToggle } from "@/web/components/ui/mode-toggle";
-import { SearchInput } from "@/web/components/ui/search-input";
-import useCounter from "@/web/stores/useCounter";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { SearchInput } from "@/components/ui/search-input";
+import useCounter from "@/stores/useCounter";
 
 export function HomePage() {
   const { count, increase, decrease } = useCounter();

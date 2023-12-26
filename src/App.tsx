@@ -1,11 +1,11 @@
-import "./styles/global.css";
+import "@/styles/global.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
-import { Providers } from "@/web/providers";
-import { AppRoutes } from "@/web/routes";
+import { Providers } from "@/providers";
+import { AppRoutes } from "@/routes";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,4 +1,4 @@
-import { cn } from "@/web/lib/utils";
+import { cn } from "@/lib/utils";
 
 import { Input } from "./input";
 import { toast } from "./use-toast";

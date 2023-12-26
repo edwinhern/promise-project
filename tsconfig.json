@@ -6,8 +6,8 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {"@/web/*": ["src/web/*"], "@/server/*": ["src/server/*"]},
-    "typeRoots": ["./node_modules/@types", "src/web/types"],
+    "paths": {"@/*": ["src/*"],},
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     
 
     /* Bundler mode */
@@ -24,6 +24,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/web/types/**/*"],
+  "include": ["src", "src/types/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
