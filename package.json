@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "lint": "eslint src --fix",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docker-prod": "docker-compose up --build",
+    "docker-stop": "docker-compose down"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",
