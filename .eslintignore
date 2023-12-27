@@ -4,3 +4,4 @@ package-lock.json
 package.json
 coverage
 tailwind.config.js
+src/pages/Three/Three.tsx
