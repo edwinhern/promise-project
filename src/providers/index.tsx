@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/providers/theme-provider";
+import { ThemeProvider } from '@/providers/theme-provider';
 
 export const Providers: React.FC<ChildProps> = ({ children }) => {
   return (
