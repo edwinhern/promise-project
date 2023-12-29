@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {
   CameraShake,
   Cloud,
@@ -6,17 +7,27 @@ import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  ShakeController,
   SpotLight,
 } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { BallCollider, CuboidCollider, Physics, RigidBody } from '@react-three/rapier';
+import {
+  BallCollider,
+  ContactForceHandler,
+  CuboidCollider,
+  Physics,
+  RapierRigidBody,
+  RigidBody,
+} from '@react-three/rapier';
 import { random } from 'maath';
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, MutableRefObject, useContext, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-const context = createContext(null);
+const context = createContext<MutableRefObject<ShakeController | undefined>>({
+  current: undefined,
+});
 export function ThreePage() {
-  const shake = useRef();
+  const shake = useRef<ShakeController>();
   return (
     <Canvas>
       <ambientLight intensity={Math.PI / 2} />
@@ -73,18 +84,33 @@ export function ThreePage() {
   );
 }
 
-function Puffycloud({ seed, vec = new THREE.Vector3(), ...props }) {
-  const api = useRef();
-  const light = useRef();
+interface PuffycloudProps {
+  seed: number;
+  position: number[];
+  vec?: THREE.Vector3;
+}
+
+function Puffycloud({ seed, vec = new THREE.Vector3(), position, ...props }: PuffycloudProps) {
+  const api = useRef<InstanceType<typeof RapierRigidBody> | null>(null);
+  const light = useRef<THREE.PointLight | null>(null);
   const rig = useContext(context);
+  const formattedPosition = position instanceof THREE.Vector3 ? position : new THREE.Vector3(...position);
+
   const [flash] = useState(() => new random.FlashGen({ count: 10, minDuration: 40, maxDuration: 200 }));
-  const contact = (payload) =>
-    payload.other.rigidBodyObject.userData?.cloud && payload.totalForceMagnitude / 1000 > 100 && flash.burst();
+  const contact: ContactForceHandler = (payload) =>
+    payload.other.rigidBodyObject?.userData?.cloud && payload.totalForceMagnitude / 1000 > 100 && flash.burst();
   useFrame((state, delta) => {
     const impulse = flash.update(state.clock.elapsedTime, delta);
-    light.current.intensity = impulse * 15000;
+    if (light.current) {
+      light.current.intensity = impulse * 15000;
+    }
     if (impulse === 1) rig?.current?.setIntensity(1);
-    api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(10));
+    if (api.current) {
+      const translation = api.current.translation();
+      const translationVec3 = new THREE.Vector3(translation.x, translation.y, translation.z);
+      vec.copy(translationVec3).negate().multiplyScalar(10);
+      api.current.applyImpulse(vec, true); // Assuming applyImpulse expects a THREE.Vector3
+    }
   });
   return (
     <RigidBody
@@ -94,6 +120,7 @@ function Puffycloud({ seed, vec = new THREE.Vector3(), ...props }) {
       linearDamping={4}
       angularDamping={1}
       friction={0.1}
+      position={formattedPosition}
       {...props}
       colliders={false}
     >
@@ -115,11 +142,12 @@ function Puffycloud({ seed, vec = new THREE.Vector3(), ...props }) {
 }
 
 function Pointer({ vec = new THREE.Vector3(), dir = new THREE.Vector3() }) {
-  const ref = useRef();
-  useFrame(({ pointer, viewport, camera }) => {
+  const ref = useRef<InstanceType<typeof RapierRigidBody> | null>(null);
+  useFrame(({ pointer, camera }) => {
     vec.set(pointer.x, pointer.y, 0.5).unproject(camera);
     dir.copy(vec).sub(camera.position).normalize();
     vec.add(dir.multiplyScalar(camera.position.length()));
+
     ref.current?.setNextKinematicTranslation(vec);
   });
   return (
