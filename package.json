@@ -20,14 +20,17 @@
     "@react-three/rapier": "^1.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "leva": "^0.9.35",
     "lucide-react": "^0.299.0",
     "maath": "^0.10.7",
+    "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
@@ -54,7 +57,8 @@
     "prettier-plugin-tailwindcss": "^0.5.9",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-glsl": "^1.2.1"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

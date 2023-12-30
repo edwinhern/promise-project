@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom';
 
-export function Base() {
+const Base = () => {
   return (
-    <div className="mx-auto h-screen min-h-screen w-full">
+    <div className="h-screen">
+      {/* Navbar to change background colors or themes */}
       <Outlet />
     </div>
   );
-}
+};
+
+export default Base;

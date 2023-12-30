@@ -13,6 +13,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["react-refresh", "simple-import-sort", "@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-console": "warn",
