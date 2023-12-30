@@ -69,13 +69,17 @@ function Overlay() {
 
       {/* Centered title with responsive font size */}
       <div className="flex flex-col items-center gap-4">
-        <h1 className="text-center  text-9xl font-semibold leading-none tracking-wider">Natwin</h1>
+        <h1 className="select-none	text-center  text-9xl font-semibold leading-none tracking-wider">Natwin</h1>
         <div className="flex items-center gap-4">
-          <Button onClick={() => previousSong()}>Previous</Button>
+          <Button className="select-none" onClick={() => previousSong()}>
+            Previous
+          </Button>
           <Button onClick={handlePlayClick}>
             {!isTrackPlaying ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
           </Button>
-          <Button onClick={() => nextSong()}>Next</Button>
+          <Button className="select-none" onClick={() => nextSong()}>
+            Next
+          </Button>
           <Button className=" animate-pulse" onClick={handleConfetti}>
             Click me
           </Button>
@@ -85,9 +89,11 @@ function Overlay() {
       {/* Bottom section */}
       <div className="flex w-full items-end justify-between">
         <div className="flex items-center gap-4">
-          <a className="text-lg lg:text-2xl">&quot;You got me skinny dipping deep inside my head&quot; -Khalid </a>
+          <a className="select-none text-lg lg:text-2xl">
+            &quot;You got me skinny dipping deep inside my head&quot; -Khalid{' '}
+          </a>
         </div>
-        <div className="hidden text-lg sm:block lg:text-2xl">02.12.2019</div>
+        <div className="hidden select-none text-lg sm:block lg:text-2xl">02.12.2019</div>
       </div>
     </div>
   );
