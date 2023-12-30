@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Leva } from 'leva';
@@ -6,15 +7,13 @@ import Scene from '@/components/Scene';
 import OrchidModal from '@/components/Three-Modals/OrchidModal';
 import { useDebugPanel } from '@/hooks';
 
-export function HomePage() {
+export function FlowerPage() {
   const isDebugPanelEnabled = useDebugPanel();
 
   return (
     <>
-      {/* leva has to be outside of canvas component */}
       <Leva flat titleBar={true} hidden={!isDebugPanelEnabled} collapsed />
 
-      {/* r3f aka three.js aka webgL scene */}
       <Canvas
         frameloop="demand"
         shadows
@@ -26,7 +25,6 @@ export function HomePage() {
           far: 300,
           zoom: 0.9,
           position: [0.2, 0.1, 0.5],
-          // position: [15, -10, -80],
         }}
       >
         <Stage preset="rembrandt" environment="sunset">
@@ -34,9 +32,6 @@ export function HomePage() {
         </Stage>
         <Scene />
       </Canvas>
-
-      {/* html content */}
-      {/* <Texts /> */}
     </>
   );
 }

@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
+import Header from '@/components/Header';
+
 const Base = () => {
   return (
     <div className="h-screen">
-      {/* Navbar to change background colors or themes */}
+      <Header />
       <Outlet />
     </div>
   );

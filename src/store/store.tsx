@@ -2,58 +2,51 @@ import { createRef, MutableRefObject } from 'react';
 import { create } from 'zustand';
 
 type StarsRef = THREE.Points<THREE.BufferGeometry, THREE.ShaderMaterial> | null;
-type MoonRef = THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial> | null;
 type AudioRef = THREE.PositionalAudio | null;
 
+type SongDetails = {
+  url: string;
+};
+
 export type State = {
-  audioAnalyser?: THREE.AudioAnalyser;
+  songs: SongDetails[];
+  currentSongIndex: number;
   isTrackPlaying: boolean;
   refs: {
     audio: MutableRefObject<AudioRef>;
-    pause: MutableRefObject<{ value: boolean }>;
-    moon: MutableRefObject<MoonRef>;
-    reverse: MutableRefObject<{ value: boolean }>;
     stars: MutableRefObject<StarsRef>;
   };
 };
 
 type Actions = {
-  setAudioAnalyser: (audioAnalyser: THREE.AudioAnalyser) => void;
   setIsTrackPlaying: (isPlaying: boolean) => void;
+  setCurrentSongIndex: (index: number) => void;
+  nextSong: () => void;
+  previousSong: () => void;
 };
 
 // refs
-export const pause = createRef<{ value: boolean }>() as MutableRefObject<{
-  value: boolean;
-}>;
-pause.current = { value: false };
-
-export const reverse = createRef<{ value: boolean }>() as MutableRefObject<{
-  value: boolean;
-}>;
-reverse.current = { value: false };
-
 const stars = createRef<StarsRef>() as MutableRefObject<StarsRef>;
 stars.current = null;
-
-const moon = createRef<MoonRef>() as MutableRefObject<MoonRef>;
-moon.current = null;
 
 const audio = createRef<AudioRef>() as MutableRefObject<AudioRef>;
 audio.current = null;
 
 const useStore = create<State & Actions>((set) => ({
-  audioAnalyser: undefined, // will be assigned when the audio track is loaded
+  songs: [{ url: '/music/Floating.mp3' }, { url: '/music/RockYourWorld.mp3' }],
+  currentSongIndex: 0,
   isTrackPlaying: false,
-  refs: {
-    audio,
-    moon,
-    pause,
-    reverse,
-    stars,
-  },
-  setAudioAnalyser: (audioAnalyser) => set(() => ({ audioAnalyser })),
+  refs: { audio, stars },
   setIsTrackPlaying: (isTrackPlaying) => set(() => ({ isTrackPlaying })),
+  setCurrentSongIndex: (index) => set({ currentSongIndex: index }),
+  nextSong: () =>
+    set((state) => ({
+      currentSongIndex: (state.currentSongIndex + 1) % state.songs.length,
+    })),
+  previousSong: () =>
+    set((state) => ({
+      currentSongIndex: (state.currentSongIndex - 1 + state.songs.length) % state.songs.length,
+    })),
 }));
 
 export default useStore;

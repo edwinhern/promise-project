@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'SunnyspellsRegular';
+  src: url('/fonts/SunnyspellsRegular.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
